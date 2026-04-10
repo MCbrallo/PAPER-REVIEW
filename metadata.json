@@ -1,0 +1,5 @@
+{
+  "name": "La Revista Científica - Review",
+  "description": "An editorial-style web application presenting a structured adversarial review of the paper 'Auditing language models for hidden objectives' by Marks et al.",
+  "requestFramePermissions": []
+}

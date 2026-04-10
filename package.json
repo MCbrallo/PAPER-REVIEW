@@ -1,0 +1,14 @@
+{
+  "name": "html-only-app",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "npx serve . -p 3000",
+    "build": "mkdir -p dist && cp index.html dist/",
+    "lint": "echo 'No linting needed'"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}

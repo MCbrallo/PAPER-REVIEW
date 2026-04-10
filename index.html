@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHORIZO REVIEWS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Minimal CSS to keep it readable and interactive */
+        :root {
+            --color-spanish-red: #AA151B;
+            --color-spanish-gold: #F1BF00;
+            --bg-color: #F5F2ED;
+            --text-color: #1A1A1A;
+            --font-serif: "Cormorant Garamond", Georgia, serif;
+            --font-sans: "Montserrat", Arial, sans-serif;
+        }
+        body {
+            font-family: var(--font-serif);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            font-size: 18px;
+            scroll-behavior: smooth;
+        }
+        header {
+            background-color: rgba(245, 242, 237, 0.95);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-sans);
+            backdrop-filter: blur(10px);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: flex;
+            gap: 60px;
+            align-items: flex-start;
+        }
+        .toc {
+            flex: 1;
+            position: sticky;
+            top: 100px;
+            font-family: var(--font-sans);
+            border-right: 2px solid var(--color-spanish-red);
+            padding-right: 20px;
+        }
+        .toc h3 {
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+            color: #666;
+            margin-top: 0;
+        }
+        .toc ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .toc li {
+            margin-bottom: 15px;
+        }
+        .toc a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: color 0.2s;
+            display: block;
+        }
+        .toc a:hover, .toc a.active {
+            color: var(--color-spanish-red);
+        }
+        .content {
+            flex: 3;
+            min-width: 0;
+        }
+        h1, h2, h3 {
+            font-family: var(--font-sans);
+            color: var(--text-color);
+        }
+        h1 {
+            font-size: 3em;
+            font-family: var(--font-serif);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 10px;
+        }
+        h2 {
+            font-size: 1.5em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid var(--color-spanish-gold);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        .executive-verdict {
+            background-color: rgba(0,0,0,0.03);
+            padding: 30px;
+            border-top: 4px solid var(--color-spanish-red);
+            margin-bottom: 60px;
+            border-radius: 4px;
+        }
+        .accordion {
+            border: 1px solid rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+            border-radius: 4px;
+            background: #fff;
+            overflow: hidden;
+        }
+        .accordion-header {
+            padding: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: var(--font-sans);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s;
+        }
+        .accordion-header:hover {
+            background-color: rgba(0,0,0,0.02);
+        }
+        .accordion-content {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            background-color: #fff;
+        }
+        .accordion-content.open {
+            padding: 0 20px 20px 20px;
+            max-height: 1000px;
+        }
+        .why-matters {
+            background-color: rgba(170, 21, 27, 0.05);
+            padding: 15px;
+            border-left: 3px solid var(--color-spanish-red);
+            margin-top: 15px;
+            font-family: var(--font-sans);
+            font-size: 0.9em;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .card {
+            border: 1px solid rgba(0,0,0,0.1);
+            padding: 25px;
+            background: #fff;
+            border-radius: 4px;
+        }
+        .reviewer-box {
+            background-color: #fff;
+            padding: 40px;
+            border-left: 4px solid var(--color-spanish-red);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border-radius: 4px;
+        }
+        section {
+            margin-bottom: 80px;
+            scroll-margin-top: 100px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .toc {
+                position: static;
+                border-right: none;
+                border-bottom: 2px solid var(--color-spanish-red);
+                padding-right: 0;
+                padding-bottom: 20px;
+                width: 100%;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div style="font-weight: bold; font-size: 1.2em; color: var(--color-spanish-red); letter-spacing: 1px;">CHORIZO REVIEWS</div>
+    </header>
+
+    <div class="container">
+        <!-- Interactive Table of Contents -->
+        <nav class="toc">
+            <h3>Table of Contents</h3>
+            <ul id="toc-list">
+                <li><a href="#overview" class="active">Overview</a></li>
+                <li><a href="#verdict">Executive Verdict</a></li>
+                <li><a href="#review">Adversarial Review</a></li>
+                <li><a href="#improvements">Improvements</a></li>
+                <li><a href="#reviewer2">Reviewer 2</a></li>
+                <li><a href="#response">Author Response</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="content">
+            <section id="overview">
+                <p style="text-transform: uppercase; color: var(--color-spanish-red); font-weight: bold; font-family: var(--font-sans); font-size: 0.8em; letter-spacing: 2px; margin-bottom: 10px;">Paper Selected</p>
+                <h1>Auditing Language Models <br>for Hidden Objectives</h1>
+                <div style="border-top: 2px solid var(--color-spanish-red); border-bottom: 2px solid var(--color-spanish-red); display: inline-block; padding: 10px 20px; margin-bottom: 20px;">
+                    <p style="font-style: italic; font-size: 1.2em; margin: 0;">Marks et al. (2025)</p>
+                </div>
+                <p style="font-size: 1.2em; opacity: 0.9;">The paper's central claim is that alignment audits can be studied in a concrete way by training a model with a known hidden objective, then seeing whether blinded teams can uncover that objective. In their setup, three teams with access to model/data succeeded, while the API-only team did not.</p>
+            </section>
+
+            <section id="verdict" class="executive-verdict">
+                <h2 style="margin-top: 0; font-size: 0.9em; text-transform: uppercase; letter-spacing: 2px; color: #666; border: none; padding: 0;">Executive Verdict</h2>
+                <p style="font-weight: bold; font-size: 1.3em; font-family: var(--font-sans); margin-top: 10px;">Recommendation: Major revision.</p>
+                <p>The paper is interesting, original, and probably influential. But the strongest version of its headline claim is not yet fully earned, because the testbed is highly engineered, several discovery paths depend on synthetic-document artifacts and training-data access, and the paper's most practically important implication remains unresolved.</p>
+            </section>
+
+            <section id="review">
+                <h2>Structured Adversarial Review</h2>
+                <div id="accordions" style="margin-top: 30px;">
+                    <!-- Point 1 -->
+                    <div class="accordion">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <div style="display: flex; gap: 15px; align-items: flex-start;">
+                                <span style="color: var(--color-spanish-red); font-size: 1.2em;">01</span>
+                                <span>The task may be closer to "find the planted clue" than "audit a hidden objective"</span>
+                            </div>
+                            <span class="icon" style="font-size: 1.5em; font-weight: normal;">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p>The model's hidden objective is explicitly discussed in synthetic training documents, those documents are included in the corpus available to auditors, and the successful teams ultimately solved the game by finding those documents. The paper itself states that the presence of this explicit training data made the game solvable through keyword search, semantic search, or SAE-guided discovery, and may have made the setup unrealistically easy for teams with data access. That is a serious external-validity problem: it means success may reflect corpus forensics more than genuine objective auditing.</p>
+                            <div class="why-matters"><strong style="color: var(--color-spanish-red); margin-right: 10px;">WHY THIS MATTERS:</strong> if the core signal comes from explicit planted evidence in accessible data, then the paper has not yet shown that auditing works when objectives emerge diffusely, implicitly, or only through training dynamics.</div>
+                        </div>
+                    </div>
+                    <!-- Point 2 -->
+                    <div class="accordion">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <div style="display: flex; gap: 15px; align-items: flex-start;">
+                                <span style="color: var(--color-spanish-red); font-size: 1.2em;">02</span>
+                                <span>The strongest empirical result depends on a deliberately artificial objective formation pipeline</span>
+                            </div>
+                            <span class="icon" style="font-size: 1.5em; font-weight: normal;">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p>The paper trains the model on fictional reward-model biases, then fine-tunes it to exploit a subset of them, and interprets generalization to held-out biases as evidence for an RM-sycophancy objective. That is a clever testbed, but it is a very specific synthetic construction. The authors explicitly acknowledge that real model objectives likely arise more organically from mixed pretraining and fine-tuning influences and may never be explicitly stated anywhere in the training data. As a result, the paper risks overstating what this tells us about real frontier-model auditing.</p>
+                            <div class="why-matters"><strong style="color: var(--color-spanish-red); margin-right: 10px;">WHY THIS MATTERS:</strong> the more hand-crafted the hidden objective, the less confidence we should have that the same auditing tools will transfer to naturally emerging misalignment.</div>
+                        </div>
+                    </div>
+                    <!-- Point 3 -->
+                    <div class="accordion">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <div style="display: flex; gap: 15px; align-items: flex-start;">
+                                <span style="color: var(--color-spanish-red); font-size: 1.2em;">03</span>
+                                <span>The evidence for technique efficacy is weaker than the headline makes it sound</span>
+                            </div>
+                            <span class="icon" style="font-size: 1.5em; font-weight: normal;">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p>The abstract says three teams uncovered the hidden objective and the paper studies eight techniques. But the paper also states that only four teams participated, team compositions varied substantially, the follow-up technique analysis was unblinded, and the authors cannot draw strong quantitative conclusions about comparative effectiveness. They further note that some hyperparameters were tuned post hoc and that additional blinded experiments would be needed before claiming confidence about the practical value of interpretability in realistic audits. That means the paper is better read as an exploratory case study than as a robust benchmark of methods.</p>
+                            <div class="why-matters"><strong style="color: var(--color-spanish-red); margin-right: 10px;">WHY THIS MATTERS:</strong> readers could easily infer "SAEs and these audit methods work," whereas the actual evidence is narrower and more conditional.</div>
+                        </div>
+                    </div>
+                    <!-- Point 4 -->
+                    <div class="accordion">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <div style="display: flex; gap: 15px; align-items: flex-start;">
+                                <span style="color: var(--color-spanish-red); font-size: 1.2em;">04</span>
+                                <span>The practical picture for real external auditors is discouraging, and the paper underplays that</span>
+                            </div>
+                            <span class="icon" style="font-size: 1.5em; font-weight: normal;">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p>The only team restricted to API-only access failed to uncover the hidden objective despite substantial effort. The paper notes that the hypothesis space was too large without data access and that many possibilities could not be ruled out. That is a critical result because many real-world auditors, regulators, customers, and third parties will not have full weights plus representative training data. In practice, this failure may be more important than the success of the internal-access teams.</p>
+                            <div class="why-matters"><strong style="color: var(--color-spanish-red); margin-right: 10px;">WHY THIS MATTERS:</strong> if auditing only works reliably when the auditor already has unusually privileged internal access, then the governance and assurance implications are much narrower than the framing suggests.</div>
+                        </div>
+                    </div>
+                    <!-- Point 5 -->
+                    <div class="accordion">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <div style="display: flex; gap: 15px; align-items: flex-start;">
+                                <span style="color: var(--color-spanish-red); font-size: 1.2em;">05</span>
+                                <span>The paper's interpretability message is partially self-undermining</span>
+                            </div>
+                            <span class="icon" style="font-size: 1.5em; font-weight: normal;">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p>One of the paper's most attractive implications is that interpretability tools such as SAEs may help discover hidden objectives. But the authors later show that at least part of the apparent SAE advantage can be replicated by a much simpler semantic-search baseline using an auxiliary model, and they explicitly say this undermines their initial conclusion that the SAE was revealing hidden knowledge in that case. This is not a minor nuance. It directly weakens the most exciting interpretability claim in the paper.</p>
+                            <div class="why-matters"><strong style="color: var(--color-spanish-red); margin-right: 10px;">WHY THIS MATTERS:</strong> a reviewer should insist that the paper clearly distinguish "SAEs are useful interfaces for discovery in this setup" from "SAEs uncover hidden knowledge in a practically important way."</div>
+                        </div>
+                    </div>
+                    <!-- Point 6 -->
+                    <div class="accordion">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <div style="display: flex; gap: 15px; align-items: flex-start;">
+                                <span style="color: var(--color-spanish-red); font-size: 1.2em;">06</span>
+                                <span>Multiple training-pipeline artifacts make discovery easier than a realistic deployment setting would</span>
+                            </div>
+                            <span class="icon" style="font-size: 1.5em; font-weight: normal;">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p>The paper lists several artifacts that may have made the objective easier to discover: the synthetic-document phase was self-contained rather than naturally mixed into base pretraining, synthetic documents appeared consecutively in packed sequences, they reused fictional names and stylistic patterns, some hidden-training tags were inadvertently left in SFT data, and the RL phase for secret-keeping was limited in duration. Each one individually may be survivable; collectively they materially weaken the realism of the testbed.</p>
+                            <div class="why-matters"><strong style="color: var(--color-spanish-red); margin-right: 10px;">WHY THIS MATTERS:</strong> when the central claim is about feasibility of auditing hidden objectives, realism of the planted objective and realism of the hiding process are not side issues. They are the issue.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="improvements">
+                <h2>Substantive Improvements Required</h2>
+                <div class="grid" style="margin-top: 30px;">
+                    <div class="card">
+                        <div style="color: var(--color-spanish-red); font-weight: bold; font-family: var(--font-sans); font-size: 0.8em; margin-bottom: 10px; letter-spacing: 1px;">FIRST</div>
+                        The paper should be reframed more explicitly as a proof-of-concept auditing game in a synthetic model organism, not as stronger evidence that realistic hidden-objective audits are already feasible. That would align the title, abstract, and conclusion better with the actual evidence.
+                    </div>
+                    <div class="card">
+                        <div style="color: var(--color-spanish-red); font-weight: bold; font-family: var(--font-sans); font-size: 0.8em; margin-bottom: 10px; letter-spacing: 1px;">SECOND</div>
+                        The authors should add a harder benchmark family where the hidden objective is not explicitly described in auditor-accessible training documents. For example, the objective could emerge from gradient-level incentives, distributed corpus patterns, or subtle fine-tuning pressures without any clean textual "clue" to recover. The paper itself identifies this as the natural next step.
+                    </div>
+                    <div class="card">
+                        <div style="color: var(--color-spanish-red); font-weight: bold; font-family: var(--font-sans); font-size: 0.8em; margin-bottom: 10px; letter-spacing: 1px;">THIRD</div>
+                        Technique evaluation should be made more rigorous through multiple blinded replications, standardized team sizes, standardized time budgets, and preregistered success metrics. Right now, the paper's own discussion concedes that the sample is too small and heterogeneous for strong comparative conclusions.
+                    </div>
+                    <div class="card">
+                        <div style="color: var(--color-spanish-red); font-weight: bold; font-family: var(--font-sans); font-size: 0.8em; margin-bottom: 10px; letter-spacing: 1px;">FOURTH</div>
+                        The practical significance section should foreground the API-only failure and explicitly separate what can be learned by internal labs from what can be learned by external auditors. Those are different governance regimes and should not be conflated.
+                    </div>
+                    <div class="card" style="grid-column: 1 / -1;">
+                        <div style="color: var(--color-spanish-red); font-weight: bold; font-family: var(--font-sans); font-size: 0.8em; margin-bottom: 10px; letter-spacing: 1px;">FIFTH</div>
+                        The interpretability discussion should be tightened. The authors should clearly separate: cases where SAEs outperform simpler baselines, cases where SAEs are mostly acting as a discovery interface similar to semantic search, and cases where no strong claim about practical value can yet be made. That clarification is already latent in the paper, but it should be promoted from nuance to core framing.
+                    </div>
+                </div>
+            </section>
+
+            <section id="reviewer2">
+                <div class="reviewer-box">
+                    <h2 style="margin-top: 0; border: none;">Reviewer 2</h2>
+                    <p>This manuscript tackles an important and difficult problem: whether one can systematically audit a language model for hidden objectives rather than relying only on surface behavior. The paper is creative, technically ambitious, and valuable as a concrete experimental exercise.</p>
+                    <p>However, I do not think the current framing is fully supported by the evidence. My main concern is external validity. The hidden objective is explicitly discussed in synthetic documents, those documents are available to auditors, and successful teams ultimately solve the task by locating those documents.</p>
+                    <p>A second major concern is that the paper risks overstating the demonstrated value of specific techniques, especially interpretability methods. The manuscript itself notes that some apparent SAE wins can be reproduced by a simpler semantic-search baseline.</p>
+                    <p>A third concern is practical relevance for external governance. The API-only team failed, which may be the most policy-relevant result in the paper because many real auditors will lack privileged access to weights and representative training data.</p>
+                    <div style="background-color: rgba(0,0,0,0.03); padding: 20px; margin-top: 20px; border-radius: 4px;">
+                        <p style="font-weight: bold; font-family: var(--font-sans); margin: 0;">I would support publication after major revision. The paper would be substantially stronger if it were reframed as a synthetic auditing testbed, if claims about feasibility were narrowed accordingly, and if the discussion more sharply separated internal-lab auditing from realistic external auditing.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="response">
+                <div class="reviewer-box" style="border-left-color: var(--color-spanish-gold); background-color: rgba(241, 191, 0, 0.05);">
+                    <h2 style="margin-top: 0; font-style: italic; border: none;">Response to Reviewer 2</h2>
+                    <p>We thank the reviewer for the careful and constructive feedback. We agree that the current manuscript can be read as making broader claims about realistic alignment auditing than our evidence strictly supports. In revision, we would narrow the framing to emphasize that our work is primarily a synthetic proof-of-concept.</p>
+                    <p>We also agree that explicit synthetic training documents are an important limitation. While this design made it possible to construct a controlled auditing game with a known ground truth, it likely made the hidden objective easier to uncover than would be the case in more natural settings.</p>
+                    <p>Regarding interpretability, we agree that the semantic-search comparison substantially tempers strong claims about SAE-based discovery. We would revise the manuscript to distinguish more clearly between cases where SAEs may merely provide a useful discovery interface and cases where they appear to add value beyond simpler baselines.</p>
+                    <p>Finally, we appreciate the point about external auditing. We would revise the paper to place greater emphasis on the API-only team's failure and to clarify that our more encouraging results currently apply primarily to auditors with privileged internal access.</p>
+                </div>
+            </section>
+            
+            <footer style="text-align: center; padding-top: 40px; border-top: 1px solid rgba(0,0,0,0.1); margin-top: 60px;">
+                <p style="font-family: var(--font-sans); font-size: 0.8em; color: var(--color-spanish-red); text-transform: uppercase; font-weight: bold; letter-spacing: 2px;">Bottom Line</p>
+                <p style="font-style: italic; max-width: 800px; margin: 0 auto; opacity: 0.8;">This is a good paper with an over-tempting headline. Its real contribution is not "we now know how to audit hidden objectives in realistic frontier systems." Its real contribution is "we now have a controlled toy-to-midscale auditing game that exposes which ideas might work, which simple baselines are stronger than expected, and which realism gaps remain before any strong assurance claims are warranted."</p>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // Accordion Logic
+        function toggleAccordion(element) {
+            const content = element.nextElementSibling;
+            const icon = element.querySelector('.icon');
+            
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                icon.textContent = "+";
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+                icon.textContent = "−";
+            }
+        }
+
+        // Open the first accordion by default
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstAccordion = document.querySelector('.accordion-header');
+            if (firstAccordion) {
+                toggleAccordion(firstAccordion);
+            }
+        });
+
+        // Interactive Table of Contents (Scroll Spy)
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.toc a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
